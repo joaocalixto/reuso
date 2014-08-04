@@ -3,6 +3,8 @@ package br.org.cesar.reuse.commons.bundle;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
+import br.org.cesar.reuse.commons.utility.Logger;
+
 public class Activator implements BundleActivator {
 
 	/*
@@ -14,7 +16,7 @@ public class Activator implements BundleActivator {
 	 */
 	@Override
 	public void start(final BundleContext context) throws Exception {
-		System.out.println("Hello World!!");
+		Logger.log(this.getClass(), "start()");
 	}
 
 	/*
@@ -25,6 +27,6 @@ public class Activator implements BundleActivator {
 	 */
 	@Override
 	public void stop(final BundleContext context) throws Exception {
-		System.out.println("Goodbye World!!");
+		Logger.log(this.getClass(), "stop()");
 	}
 }
