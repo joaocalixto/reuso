@@ -7,3 +7,5 @@ Bundle-Activator: br.org.cesar.reuse.commons.bundle.Activator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: org.osgi.framework;version="1.3.0"
 Bundle-ActivationPolicy: lazy
+Export-Package: br.org.cesar.reuse.commons.model,
+ br.org.cesar.reuse.commons.service
