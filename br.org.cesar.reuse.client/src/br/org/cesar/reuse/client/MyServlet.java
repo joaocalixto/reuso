@@ -7,8 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.org.cesar.reuse.service.ServiceManager;
+
 public class MyServlet extends HttpServlet {
 
+	private ServiceManager serviceManager;
+	
 	/**
 	 * 
 	 */
