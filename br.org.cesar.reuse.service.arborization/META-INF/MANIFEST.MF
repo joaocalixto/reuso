@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ServiceArborization
+Bundle-SymbolicName: br.org.cesar.reuse.service.arborization
+Bundle-Version: 1.0.0.qualifier
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Import-Package: br.org.cesar.reuse.commons.model,
+ br.org.cesar.reuse.commons.service,
+ org.osgi.framework;version="1.3.0"
+Service-Component: OSGI-INF/component.xml

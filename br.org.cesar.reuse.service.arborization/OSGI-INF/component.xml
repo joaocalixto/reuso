@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="IRepairArborization">
+   <implementation class="br.org.cesar.reuse.service.arborization.RepairArborization"/>
+   <service>
+      <provide interface="br.org.cesar.reuse.commons.service.IRepair"/>
+   </service>
+</scr:component>
