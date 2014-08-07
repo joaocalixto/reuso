@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import br.org.cesar.reuse.service.ServiceManager;
 
 public class MyServlet extends HttpServlet {
-
-	private ServiceManager serviceManager;
 	
 	/**
 	 * 
@@ -19,7 +17,10 @@ public class MyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.getWriter().write("<html><body>oi</body></html>");
+		
+		ServiceManager serviceManager = Activator.getServiceManager();
+		
+		resp.getWriter().write("<html><body>" + serviceManager.getServices() +"</body></html>");
 	}
 
 }

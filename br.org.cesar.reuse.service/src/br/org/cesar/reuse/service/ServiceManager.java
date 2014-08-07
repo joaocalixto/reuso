@@ -10,22 +10,33 @@ public class ServiceManager {
 	
 	List<IRepair> services = new ArrayList<IRepair>();
 	
-	public void addService(IRepair service){
+	protected void addService(IRepair service){
 		System.out.println("Add Service");
 		services.add(service);
 	}
 	
-	public void removeService(IRepair service){
+	protected void removeService(IRepair service){
 		System.out.println("Remove Service");
 		services.remove(service);
 	}
 	
 	public String requestRepair(Repair repair){
 		String result = "";
+				
 		for (IRepair repairService : services){
-			 result = result + "; "+ repairService.getService();
+			result = result + "; "+ repairService.getService();
 		}
 		return result;
+	}
+	
+	public String getServices(){
+		String result = "";
+		
+		for (IRepair repairService : services){
+			result = result + "; "+ repairService.getService();
+		}
+		return result;
+		
 	}
 
 }

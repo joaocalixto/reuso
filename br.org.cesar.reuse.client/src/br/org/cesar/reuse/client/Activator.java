@@ -4,10 +4,16 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.http.HttpService;
+import org.osgi.util.tracker.ServiceTracker;
+
+import br.org.cesar.reuse.service.ServiceManager;
 
 public class Activator implements BundleActivator {
 
 	private static BundleContext context;
+	
+	ServiceTracker serviceTracker;
+	static ServiceManager serviceManager;
 
 	static BundleContext getContext() {
 		return context;
@@ -27,6 +33,11 @@ public class Activator implements BundleActivator {
 			http.registerServlet("/ui", new MyServlet(), null, null);
 			System.out.println("Servlet Registrado");
 		}
+		
+		serviceTracker = new ServiceTracker<>(context, ServiceManager.class.getName(), null);
+		serviceTracker.open();
+		
+		serviceManager = (ServiceManager) serviceTracker.getService();
 	}
 
 	/*
@@ -35,6 +46,11 @@ public class Activator implements BundleActivator {
 	 */
 	public void stop(BundleContext bundleContext) throws Exception {
 		Activator.context = null;
+		serviceTracker.close();
+	}
+	
+	public static ServiceManager getServiceManager(){
+		return serviceManager;
 	}
 
 }

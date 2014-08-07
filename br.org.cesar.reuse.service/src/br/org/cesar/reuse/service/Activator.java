@@ -24,6 +24,8 @@ public class Activator implements BundleActivator {
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
 		
+		System.out.println("main Service started");
+		
 		context.registerService(ServiceManager.class.getName(), serviceManager, null);
 		
 		ServiceTrackerRepair myserviceTracker = new ServiceTrackerRepair(bundleContext, serviceManager);
