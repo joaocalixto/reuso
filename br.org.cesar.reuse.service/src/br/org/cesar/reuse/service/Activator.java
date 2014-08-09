@@ -5,6 +5,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
 
 import br.org.cesar.reuse.commons.service.IRepair;
+import br.org.cesar.reuse.commons.utility.Logger;
 
 public class Activator implements BundleActivator {
 
@@ -22,9 +23,9 @@ public class Activator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
-		Activator.context = bundleContext;
+		context = bundleContext;
 		
-		System.out.println("main Service started");
+		Logger.log("Main Service Started");
 		
 		context.registerService(ServiceManager.class.getName(), serviceManager, null);
 		
@@ -39,9 +40,8 @@ public class Activator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext bundleContext) throws Exception {
-		Activator.context = null;
+		context = null;
 		serviceManager = null;
 		serviceTracker.close();
 	}
-
 }

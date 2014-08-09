@@ -16,7 +16,7 @@ public class Activator implements BundleActivator {
 	 */
 	@Override
 	public void start(final BundleContext context) throws Exception {
-		Logger.log(this.getClass(), "start()");
+		Logger.log(getClass(), "start()");
 	}
 
 	/*
@@ -27,6 +27,6 @@ public class Activator implements BundleActivator {
 	 */
 	@Override
 	public void stop(final BundleContext context) throws Exception {
-		Logger.log(this.getClass(), "stop()");
+		Logger.log(getClass(), "stop()");
 	}
 }
