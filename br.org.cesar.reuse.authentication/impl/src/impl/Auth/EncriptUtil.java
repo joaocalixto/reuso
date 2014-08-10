@@ -1,4 +1,4 @@
-package core.impl.util;
+package impl.Auth;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

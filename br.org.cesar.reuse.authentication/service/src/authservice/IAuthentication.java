@@ -1,6 +1,5 @@
-package core;
+package authservice;
 
-import core.model.User;
 
 public interface IAuthentication {
 	

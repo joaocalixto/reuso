@@ -1,13 +1,12 @@
-package core.impl.dao;
+package impl.Auth;
 
 import java.util.ArrayList;
+
+import authservice.User;
 
 import com.db4o.Db4o;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
-
-import core.impl.util.EncriptUtil;
-import core.model.User;
 
 public class UserDAO {
 

@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Authentication
-Bundle-SymbolicName: Authentication
+Bundle-Name: AuthenImpl
+Bundle-SymbolicName: AuthenImpl
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Require-Bundle: org.junit
-Export-Package: core
+Import-Package: authservice
+Service-Component: component.xml

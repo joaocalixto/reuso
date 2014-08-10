@@ -1,4 +1,4 @@
-package core.model;
+package authservice;
 
 public class User {
 	
