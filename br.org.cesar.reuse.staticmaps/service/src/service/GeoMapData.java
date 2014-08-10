@@ -1,4 +1,4 @@
-package core.model;
+package service;
 
 import java.math.BigDecimal;
 

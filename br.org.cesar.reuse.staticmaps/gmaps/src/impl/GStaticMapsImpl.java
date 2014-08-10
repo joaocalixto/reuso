@@ -1,12 +1,12 @@
-package core.impl;
+package impl;
 
 import java.math.BigDecimal;
 
-import core.IStaticMap;
-import core.exception.StaticMapException;
-import core.model.GeoMapData;
+import service.GeoMapData;
+import service.IStaticMap;
+import service.StaticMapException;
 
-public class StaticGMaps implements IStaticMap{
+public class GStaticMapsImpl implements IStaticMap {
 
 	public static final String prefix = "http://maps.googleapis.com/maps/api/staticmap?";
 	public static final String separete_str = "&";
@@ -63,9 +63,5 @@ public class StaticGMaps implements IStaticMap{
 		}
 		return centerStr;
 	}
-	
-	
-	
-
 
 }

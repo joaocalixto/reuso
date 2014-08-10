@@ -1,7 +1,5 @@
-package core;
+package service;
 
-import core.exception.StaticMapException;
-import core.model.GeoMapData;
 
 public interface IStaticMap {
 	

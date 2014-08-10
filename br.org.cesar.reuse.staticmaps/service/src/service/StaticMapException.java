@@ -1,4 +1,4 @@
-package core.exception;
+package service;
 
 public class StaticMapException extends Exception {
 
