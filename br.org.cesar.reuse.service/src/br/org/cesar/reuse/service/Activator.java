@@ -12,6 +12,7 @@ public class Activator implements BundleActivator {
 	private static BundleContext context;
 	
 	public ServiceManager serviceManager = new ServiceManager();
+	
 	private ServiceTracker serviceTracker;
 
 	static BundleContext getContext() {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.org.cesar.reuse.commons.model.Repair;
+import br.org.cesar.reuse.commons.model.User;
 import br.org.cesar.reuse.commons.service.IRepair;
 import br.org.cesar.reuse.commons.utility.Logger;
 
@@ -20,6 +21,11 @@ public class ServiceManager {
 		Logger.log("Remove Service");
 		services.remove(service);
 	}
+	
+	
+	/*
+	 * Public methods to client service
+	 */
 
 	public String requestRepair(final Repair repair) {
 		String result = "";
@@ -49,5 +55,9 @@ public class ServiceManager {
 		}
 		
 		return null;
+	}
+	
+	public boolean login(User user){
+		return SecurityManager.getInstanceIAuthentication().login(user);
 	}
 }

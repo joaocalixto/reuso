@@ -1,5 +1,7 @@
 package authservice;
 
+import br.org.cesar.reuse.commons.model.User;
+
 
 public interface IAuthentication {
 	

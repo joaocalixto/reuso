@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="IMyAuth">
+   <implementation class="br.org.cesar.reuse.service.SecurityManager"/>
+   <reference bind="setAuth" cardinality="1..1" interface="authservice.IAuthentication" name="IAuthentication" policy="static" unbind="unsetAuth"/>
+</scr:component>
