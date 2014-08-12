@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.org.cesar.reuse.commons.service.IRepair;
 import br.org.cesar.reuse.service.ServiceManager;
 
 public class MyServlet extends HttpServlet {
@@ -22,11 +23,32 @@ public class MyServlet extends HttpServlet {
 			final HttpServletResponse response) throws ServletException,
 			IOException {
 		final ServiceManager serviceManager = Activator.getServiceManager();
+			
+		String value = request.getParameter(Activator.PARAM_NAME);
 
-		// Chamar getPage() aqui.
-		response.getWriter().write(
-				"<html><body>" + serviceManager.getServices()
-						+ "</body></html>");
+		if (value != null) {
+
+			IRepair serviceRepair = serviceManager.getService(value);
+			String content = getPage(serviceRepair.getAtributes());
+
+			response.getWriter().write(content);
+		} else {
+
+			String[] services = serviceManager.getServices().split(";");
+
+			response.getWriter().write("<html><body> ");
+
+			for (int i = 0; i < services.length; i++) {
+				response.getWriter().write(getLink(services[i]));
+			}
+
+			response.getWriter().write("</body></html>");
+
+		}
+	}
+	
+	private String getLink(String content){
+		return "<a href='"+ Activator.PATH_UI + Activator.PARAM_EQUALS + content +"'> "+ content + "</a> <br>";
 	}
 
 	private String getPage(final List<String> atributeList) {

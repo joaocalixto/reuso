@@ -31,12 +31,23 @@ public class ServiceManager {
 	}
 
 	public String getServices() {
-		String result = "";
+		final StringBuilder stringBuilder = new StringBuilder();
 
 		for (final IRepair repairService : services) {
-			result = result + "; " + repairService.getService();
+			stringBuilder.append(";"+repairService.getService());
 		}
-		return result;
-
+		
+		return stringBuilder.delete(0, 1).toString();
+	}
+	
+	public IRepair getService(String serviceName){
+		
+		for (final IRepair repairService : services) {
+			if (repairService.getService().equals(serviceName)){
+				return repairService;
+			}
+		}
+		
+		return null;
 	}
 }

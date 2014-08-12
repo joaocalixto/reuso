@@ -16,6 +16,10 @@ public class Activator implements BundleActivator {
 	private ServiceTracker serviceTracker;
 	
 	static ServiceManager serviceManager;
+	
+	public static final String PATH_UI = "/ui";
+	public static final String PARAM_NAME = "service_name";
+	public static final String PARAM_EQUALS = "?service_name=";
 
 	static BundleContext getContext() {
 		return context;
@@ -32,7 +36,7 @@ public class Activator implements BundleActivator {
 		HttpService http = (HttpService)context.getService(sr);
 		
 		if (http != null) {
-			http.registerServlet("/ui", new MyServlet(), null, null);
+			http.registerServlet(PATH_UI, new MyServlet(), null, null);
 			
 			Logger.log("Servlet Registrado");
 		}

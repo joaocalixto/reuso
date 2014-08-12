@@ -7,7 +7,7 @@ import br.org.cesar.reuse.commons.utility.Logger;
 
 public class RepairLighting implements IRepair {
 
-	private static final String SERVICE = "Lighting Service";
+	private static final String SERVICE = "LightingService";
 	
 	@Override
 	public String getService() {

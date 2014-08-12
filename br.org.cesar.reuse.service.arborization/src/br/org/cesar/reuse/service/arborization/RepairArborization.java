@@ -7,7 +7,7 @@ import br.org.cesar.reuse.commons.utility.Logger;
 
 public class RepairArborization implements IRepair {
 
-	private static final String SERVICE = "Arborization Service";
+	private static final String SERVICE = "ArborizationService";
 	
 	@Override
 	public String getService() {
