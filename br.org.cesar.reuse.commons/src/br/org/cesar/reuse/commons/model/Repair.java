@@ -1,6 +1,8 @@
 package br.org.cesar.reuse.commons.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Repair {
 
@@ -83,5 +85,14 @@ public class Repair {
 	 */
 	public final void setStatus(final RepairStatus status) {
 		this.status = status;
+	}
+
+	public static List<String> getAtributes() {
+
+		return new ArrayList<String>() {
+			{
+				add("Description");
+			}
+		};
 	}
 }
