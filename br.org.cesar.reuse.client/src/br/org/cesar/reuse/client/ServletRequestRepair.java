@@ -30,57 +30,59 @@ public class ServletRequestRepair extends HttpServlet {
 			IOException {
 
 	}
-	
+
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
+	protected void doPost(final HttpServletRequest request,
+			final HttpServletResponse response) throws ServletException,
+			IOException {
+
 		final ServiceManager serviceManager = Activator.getServiceManager();
-		
+
 		final String value = request.getParameter(Util.PARAM_NAME);
-		
-		if (value != null){
-			
+
+		if (value != null) {
+
 			final IRepair serviceRepair = serviceManager.getService(value);
-			
+
 			boolean success = false;
-			
-			if (serviceRepair instanceof LightingService){
-				
-				//get fields from form
-				LightingRepeair repair = new LightingRepeair();
+
+			if (serviceRepair instanceof LightingService) {
+
+				// get fields from form
+				final LightingRepeair repair = new LightingRepeair();
 				repair.setDescription("Teste Light");
 				repair.setId(System.currentTimeMillis());
-				repair.setLocation(new Location());
+				repair.setLocation(new Location(-8.058152, -34.871964));
 				repair.setOpeningDate(new Date());
 				repair.setStatus(RepairStatus.OPEN);
 				repair.setLightingType("Poste");
-				
+
 				success = serviceRepair.requestRepair(repair);
-				
-			} else if(serviceRepair instanceof ArborizationService){
-				
-				//get fields from form
-				ArborizationRepair repair = new ArborizationRepair();
+
+			} else if (serviceRepair instanceof ArborizationService) {
+
+				// get fields from form
+				final ArborizationRepair repair = new ArborizationRepair();
 				repair.setDescription("Teste");
 				repair.setId(System.currentTimeMillis());
-				repair.setLocation(new Location());
+				repair.setLocation(new Location(-8.058152, -34.871964));
 				repair.setOpeningDate(new Date());
 				repair.setStatus(RepairStatus.OPEN);
 				repair.setTreeType("Arvore Pau Brasil");
-				
+
 				success = serviceRepair.requestRepair(repair);
 			}
-			
-			if (success){
-				response.getWriter().write("<html><body> Servico Requisitado com Sucesso! <br> ");
+
+			if (success) {
+				response.getWriter().write(
+						"<html><body> Servico Requisitado com Sucesso! <br> ");
 				response.getWriter().write("</body></html>");
-			}else{
-				response.getWriter().write("<html><body> Falha ao requisitar o serviço! <br> ");
+			} else {
+				response.getWriter().write(
+						"<html><body> Falha ao requisitar o serviço! <br> ");
 				response.getWriter().write("</body></html>");
 			}
 		}
 	}
-	
 
 }

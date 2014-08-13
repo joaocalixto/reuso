@@ -5,6 +5,15 @@ public class Location {
 	private double latitude;
 	private double longitude;
 
+	public Location() {
+
+	}
+
+	public Location(final double latitude, final double longitude) {
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+
 	/**
 	 * @return the latitude
 	 */
