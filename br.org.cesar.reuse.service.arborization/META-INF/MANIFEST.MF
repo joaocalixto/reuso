@@ -10,3 +10,4 @@ Import-Package: br.org.cesar.reuse.commons.model,
  br.org.cesar.reuse.commons.utility,
  org.osgi.framework;version="1.3.0"
 Service-Component: OSGI-INF/component.xml
+Export-Package: br.org.cesar.reuse.service.arborization

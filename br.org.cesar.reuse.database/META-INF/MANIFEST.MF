@@ -4,5 +4,8 @@ Bundle-Name: Database
 Bundle-SymbolicName: br.org.cesar.reuse.database
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Import-Package: br.org.cesar.reuse.commons.model,org.osgi.framework;version="1.3.0"
+Import-Package: br.org.cesar.reuse.commons.model,
+ br.org.cesar.reuse.service.arborization,
+ br.org.cesar.reuse.service.lighting,
+ org.osgi.framework;version="1.3.0"
 Bundle-ActivationPolicy: lazy

@@ -7,6 +7,8 @@ import java.util.Map;
 
 import br.org.cesar.reuse.commons.model.Repair;
 import br.org.cesar.reuse.commons.model.User;
+import br.org.cesar.reuse.service.arborization.ArborizationRepair;
+import br.org.cesar.reuse.service.lighting.LightingRepeair;
 
 public class DatabaseManager {
 
@@ -46,6 +48,26 @@ public class DatabaseManager {
 
 	public List<Repair> getAllRepair() {
 		return new ArrayList<Repair>(repairMap.values());
+	}
+
+	public List<Repair> getAllRepair(final Class<? extends Repair> repairClass) {
+		final List<Repair> repairList = new ArrayList<>();
+
+		for (final Map.Entry<Long, Repair> entry : repairMap.entrySet()) {
+
+			if (entry.getValue().getClass()
+					.isAssignableFrom(ArborizationRepair.class)) {
+
+				repairList.add(entry.getValue());
+
+			} else if (entry.getValue().getClass()
+					.isAssignableFrom(LightingRepeair.class)) {
+
+				repairList.add(entry.getValue());
+			}
+		}
+
+		return repairList;
 	}
 
 	public void removeRepair(final long id) {
