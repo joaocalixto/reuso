@@ -23,18 +23,18 @@ public class ServletServices extends HttpServlet {
 			final HttpServletResponse response) throws ServletException,
 			IOException {
 		final ServiceManager serviceManager = Activator.getServiceManager();
-			
-		String value = request.getParameter(Util.PARAM_NAME);
+
+		final String value = request.getParameter(Util.PARAM_NAME);
 
 		if (value != null) {
 
-			IRepair serviceRepair = serviceManager.getService(value);
-			String content = getPage(serviceRepair.getAtributes());
+			final IRepair serviceRepair = serviceManager.getService(value);
+			final String content = getPage(serviceRepair.getAtributes());
 
 			response.getWriter().write(content);
 		} else {
 
-			String[] services = serviceManager.getServices().split(";");
+			final String[] services = serviceManager.getServices().split(";");
 
 			response.getWriter().write("<html><body> ");
 
@@ -46,9 +46,10 @@ public class ServletServices extends HttpServlet {
 
 		}
 	}
-	
-	private String getLink(String content){
-		return "<a href='"+ Util.PATH_SERVICES + Util.PARAM_EQUALS + content +"'> "+ content + "</a> <br>";
+
+	private String getLink(final String content) {
+		return "<a href='" + Util.PATH_SERVICES + Util.PARAM_EQUALS + content
+				+ "'> " + content + "</a> <br>";
 	}
 
 	private String getPage(final List<String> atributeList) {
@@ -58,6 +59,11 @@ public class ServletServices extends HttpServlet {
 		stringBuilder.append("<html>");
 
 		stringBuilder.append("<head>");
+
+		stringBuilder
+				.append("<style> table,th,td { border:1px solid black; border-collapse:collapse; }"
+						+ "th,td { padding:5px; }" + "</style>");
+
 		stringBuilder.append("</head>");
 
 		stringBuilder.append("<body>");
