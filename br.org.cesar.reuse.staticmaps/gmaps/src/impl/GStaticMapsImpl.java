@@ -2,7 +2,7 @@ package impl;
 
 import java.math.BigDecimal;
 
-import service.maps.IStaticMap;
+import newmaps.IStaticMap;
 import br.org.cesar.reuse.commons.model.GeoMapData;
 import br.org.cesar.reuse.commons.model.StaticMapException;
 
@@ -42,13 +42,13 @@ public class GStaticMapsImpl implements IStaticMap {
 	
 	private StringBuilder validateAndBuildCenter(BigDecimal[] center) throws StaticMapException {
 		StringBuilder centerStr = new StringBuilder();
-		if(center != null && center.length > 1) {
+		/*if(center != null && center.length > 1) {
 			centerStr = new StringBuilder();
 			centerStr.append("center=");
 			centerStr.append(center[0].toString()+","+center[1].toString());
 		}else {
 			throw new StaticMapException("Parametro Invalido" + "[CENTER]");
-		}
+		}*/
 		return centerStr;
 	}
 	

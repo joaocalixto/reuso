@@ -2,6 +2,6 @@
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="GStaticMaps">
    <implementation class="impl.GStaticMapsImpl"/>
    <service>
-      <provide interface="service.maps.IStaticMap"/>
+      <provide interface="newmaps.IStaticMap"/>
    </service>
 </scr:component>

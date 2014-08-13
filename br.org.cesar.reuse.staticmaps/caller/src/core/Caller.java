@@ -2,9 +2,8 @@ package core;
 
 import java.math.BigDecimal;
 
-import service.maps.IStaticMap;
+import newmaps.IStaticMap;
 import br.org.cesar.reuse.commons.model.GeoMapData;
-import br.org.cesar.reuse.commons.model.StaticMapException;
 
 public class Caller {
 	/**

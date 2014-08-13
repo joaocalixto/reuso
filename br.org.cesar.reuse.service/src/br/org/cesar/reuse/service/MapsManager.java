@@ -1,6 +1,6 @@
 package br.org.cesar.reuse.service;
 
-import service.maps.IStaticMap;
+import newmaps.IStaticMap;
 import br.org.cesar.reuse.commons.model.GeoMapData;
 import br.org.cesar.reuse.commons.model.StaticMapException;
 
