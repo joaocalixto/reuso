@@ -8,6 +8,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: br.org.cesar.reuse.commons.model,
  br.org.cesar.reuse.commons.service,
  br.org.cesar.reuse.commons.utility,
+ br.org.cesar.reuse.database,
  javax.servlet;version="2.6.0",
  javax.servlet.http;version="2.6.0",
  org.osgi.framework;version="1.3.0"

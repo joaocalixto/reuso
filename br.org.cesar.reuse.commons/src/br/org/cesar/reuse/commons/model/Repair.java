@@ -91,7 +91,7 @@ public class Repair {
 
 		return new ArrayList<String>() {
 			{
-				add("Descrição");
+				add("Description");
 			}
 		};
 	}
@@ -99,14 +99,13 @@ public class Repair {
 	public static List<String> getAtributes(final User user) {
 		final List<String> atributesList = new ArrayList<>();
 
-		atributesList.add("Descrição");
-		atributesList.add("Data de Abertura");
+		atributesList.add("Description");
+		atributesList.add("Open_Date");
 
 		if (user != null) {
-			atributesList.add("Localização");
+			atributesList.add("Location");
+			atributesList.add("Status");
 		}
-
-		atributesList.add("Status");
 
 		return atributesList;
 	}

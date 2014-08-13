@@ -36,6 +36,7 @@ public class Activator implements BundleActivator {
 		if (http != null) {
 			http.registerServlet(Util.PATH_MAIN, new ServletMain(), null, null);
 			http.registerServlet(Util.PATH_SERVICES, new ServletServices(), null, null);
+			http.registerServlet(Util.PATH_REQUEST, new ServletRequestRepair(), null, null);
 			
 			Logger.log("Servlet Registrado");
 		}

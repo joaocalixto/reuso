@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.org.cesar.reuse.commons.model.ArborizationRepair;
+import br.org.cesar.reuse.commons.model.LightingRepeair;
 import br.org.cesar.reuse.commons.model.Repair;
 import br.org.cesar.reuse.commons.model.User;
 import br.org.cesar.reuse.commons.service.IRepair;
 import br.org.cesar.reuse.service.ServiceManager;
-import br.org.cesar.reuse.service.arborization.ArborizationRepair;
-import br.org.cesar.reuse.service.lighting.LightingRepeair;
 
 public class ServletServices extends HttpServlet {
 
@@ -21,6 +21,8 @@ public class ServletServices extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	String value;
 
 	@Override
 	protected void doGet(final HttpServletRequest request,
@@ -28,7 +30,7 @@ public class ServletServices extends HttpServlet {
 			IOException {
 		final ServiceManager serviceManager = Activator.getServiceManager();
 
-		final String value = request.getParameter(Util.PARAM_NAME);
+		value = request.getParameter(Util.PARAM_NAME);
 
 		if (value != null) {
 
@@ -44,14 +46,14 @@ public class ServletServices extends HttpServlet {
 
 				List<String> listAtributes = serviceRepair.getAtributes(null);
 				content.append(getPage(listAtributes));
-				content.append(getPageList(listAtributes, listRepairs));
+				content.append(getPageUserAnonymousList(listAtributes, listRepairs));
 
 			} else if (userType == Util.USER_LOGGED) {
 				List<String> listAtributes = serviceRepair
 						.getAtributes(new User());
 
 				content.append(getPage(listAtributes));
-				content.append(getPageList(listAtributes, listRepairs));
+				content.append(getPageUserLoggedList(listAtributes, listRepairs));
 			}
 
 			content.append("</body>");
@@ -95,14 +97,18 @@ public class ServletServices extends HttpServlet {
 
 		stringBuilder.append("<body>");
 
-		stringBuilder.append("<form>");
+		stringBuilder.append("<form action='"+Util.PATH_REQUEST+"' method='post'>");
 
 		for (final String atribute : atributeList) {
 			stringBuilder.append(atribute + ": <input type=\"text\" name=\""
 					+ atribute + "\"><br>");
 		}
 
-		stringBuilder.append("<input type=\"submit\" value=\"Submeter\">");
+		stringBuilder.append("<input type=\"hidden\" name=\""+Util.PARAM_NAME+"\" value=\""+value+"\"/>");
+		
+		stringBuilder.append("<input type=\"submit\" value=\"Submeter\"/>");
+		
+		
 
 		stringBuilder.append("</form>");
 
@@ -113,7 +119,7 @@ public class ServletServices extends HttpServlet {
 		return stringBuilder.toString();
 	}
 
-	private String getPageList(final List<String> atributeList,
+	private String getPageUserAnonymousList(final List<String> atributeList,
 			final List<Repair> repeairList) {
 
 		final StringBuilder stringBuilder = new StringBuilder();
@@ -128,18 +134,22 @@ public class ServletServices extends HttpServlet {
 		stringBuilder.append("</tr>");
 		stringBuilder.append("<tr>");
 
-		for (final Repair repair : repeairList) {
-			
-			stringBuilder.append("<th>" + repair.getDescription() + "</th>");
-			stringBuilder.append("<th>" + repair.getOpeningDate() + "</th>");
-			
-			if (repair instanceof LightingRepeair) {
-				stringBuilder.append("<th>" + ((LightingRepeair) repair).getLightingType() + "</th>");
-			} else if (repair instanceof ArborizationRepair) {
-				stringBuilder.append("<th>" + ((ArborizationRepair) repair).getTreeType() + "</th>");
+		if (repeairList != null){
+				
+			for (final Repair repair : repeairList) {
+				
+				stringBuilder.append("<th>" + repair.getDescription() + "</th>");
+				stringBuilder.append("<th>" + repair.getOpeningDate() + "</th>");
+				
+				if (repair instanceof LightingRepeair) {
+					stringBuilder.append("<th>" + ((LightingRepeair) repair).getLightingType() + "</th>");
+				} else if (repair instanceof ArborizationRepair) {
+					stringBuilder.append("<th>" + ((ArborizationRepair) repair).getTreeType() + "</th>");
+				}
+				
+				stringBuilder.append("<th>" + repair.getStatus().getName() + "</th>");
 			}
-			
-			stringBuilder.append("<th>" + repair.getStatus().getName() + "</th>");
+		
 		}
 
 		stringBuilder.append("</tr>");
@@ -149,7 +159,7 @@ public class ServletServices extends HttpServlet {
 		return stringBuilder.toString();
 	}
 
-	private String getPageUserList(final List<String> atributeList,
+	private String getPageUserLoggedList(final List<String> atributeList,
 			final List<Repair> repeairList) {
 
 		final StringBuilder stringBuilder = new StringBuilder();
@@ -164,19 +174,23 @@ public class ServletServices extends HttpServlet {
 		stringBuilder.append("</tr>");
 		stringBuilder.append("<tr>");
 
-		for (final Repair repair : repeairList) {
-			
-			stringBuilder.append("<th>" + repair.getDescription() + "</th>");
-			stringBuilder.append("<th>" + repair.getOpeningDate() + "</th>");
-			stringBuilder.append("<th> <a href=\"#\">Visualizar</a> </th>");
-			
-			if (repair instanceof LightingRepeair) {
-				stringBuilder.append("<th>" + ((LightingRepeair) repair).getLightingType() + "</th>");
-			} else if (repair instanceof ArborizationRepair) {
-				stringBuilder.append("<th>" + ((ArborizationRepair) repair).getTreeType() + "</th>");
+		if (repeairList != null){
+		
+			for (final Repair repair : repeairList) {
+				
+				stringBuilder.append("<th>" + repair.getDescription() + "</th>");
+				stringBuilder.append("<th>" + repair.getOpeningDate() + "</th>");
+				stringBuilder.append("<th> <a href=\"#\">Visualizar</a> </th>");
+				
+				if (repair instanceof LightingRepeair) {
+					stringBuilder.append("<th>" + ((LightingRepeair) repair).getLightingType() + "</th>");
+				} else if (repair instanceof ArborizationRepair) {
+					stringBuilder.append("<th>" + ((ArborizationRepair) repair).getTreeType() + "</th>");
+				}
+				
+				stringBuilder.append("<th>" + repair.getStatus().getName() + "<a href=\"#\">Alterar</a>" + "</th>");
 			}
-			
-			stringBuilder.append("<th>" + repair.getStatus().getName() + "<a href=\"#\">Alterar</a>" + "</th>");
+		
 		}
 
 		stringBuilder.append("</tr>");

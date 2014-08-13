@@ -4,6 +4,9 @@ public class Util {
 
 	public static final String PATH_MAIN = "/main";
 	public static final String PATH_SERVICES = "/services";
+	
+	public static final String PATH_REQUEST = "/requestRepair";
+	
 	public static final String PARAM_NAME = "service_name";
 	public static final String PARAM_EQUALS = "?service_name=";
 	

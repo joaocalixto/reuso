@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.org.cesar.reuse.commons.model.ArborizationRepair;
+import br.org.cesar.reuse.commons.model.LightingRepeair;
 import br.org.cesar.reuse.commons.model.Repair;
 import br.org.cesar.reuse.commons.model.User;
-import br.org.cesar.reuse.service.arborization.ArborizationRepair;
-import br.org.cesar.reuse.service.lighting.LightingRepeair;
 
 public class DatabaseManager {
 
@@ -56,12 +56,12 @@ public class DatabaseManager {
 		for (final Map.Entry<Long, Repair> entry : repairMap.entrySet()) {
 
 			if (entry.getValue().getClass()
-					.isAssignableFrom(ArborizationRepair.class)) {
+					.isAssignableFrom(repairClass)) {
 
 				repairList.add(entry.getValue());
 
 			} else if (entry.getValue().getClass()
-					.isAssignableFrom(LightingRepeair.class)) {
+					.isAssignableFrom(repairClass)) {
 
 				repairList.add(entry.getValue());
 			}
