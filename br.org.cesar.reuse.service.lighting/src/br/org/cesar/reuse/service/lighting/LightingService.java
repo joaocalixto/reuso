@@ -2,6 +2,8 @@ package br.org.cesar.reuse.service.lighting;
 
 import java.util.List;
 
+import br.org.cesar.reuse.commons.model.Repair;
+import br.org.cesar.reuse.commons.model.User;
 import br.org.cesar.reuse.commons.service.IRepair;
 import br.org.cesar.reuse.commons.utility.Logger;
 
@@ -29,5 +31,22 @@ public class LightingService implements IRepair {
 	@Override
 	public List<String> getAtributes() {
 		return LightingRepeair.getAtributes();
+	}
+
+	@Override
+	public List<String> getAtributes(User user) {
+		return LightingRepeair.getAtributes(user);
+	}
+
+	@Override
+	public boolean requestRepair(Repair repair) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<Repair> getRepairs() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

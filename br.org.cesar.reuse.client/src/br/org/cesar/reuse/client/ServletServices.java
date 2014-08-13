@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.org.cesar.reuse.commons.model.Repair;
 import br.org.cesar.reuse.commons.model.User;
 import br.org.cesar.reuse.commons.service.IRepair;
 import br.org.cesar.reuse.service.ServiceManager;
+import br.org.cesar.reuse.service.arborization.ArborizationRepair;
 import br.org.cesar.reuse.service.lighting.LightingRepeair;
 
 public class ServletServices extends HttpServlet {
@@ -30,18 +32,33 @@ public class ServletServices extends HttpServlet {
 
 		if (value != null) {
 
-			int userType = SessionState.getTypeUserSession(request.getSession());
-			
+			int userType = SessionState
+					.getTypeUserSession(request.getSession());
+
 			final IRepair serviceRepair = serviceManager.getService(value);
-			
-			String content = "";
-			if (userType == Util.USER_ANONYMOUS)
-				content = getPage(serviceRepair.getAtributes(null));
-			else if (userType == Util.USER_LOGGED){
-				content = getPage(serviceRepair.getAtributes(new User()));
+
+			StringBuilder content = new StringBuilder();
+			List<Repair> listRepairs = serviceRepair.getRepairs();
+
+			if (userType == Util.USER_ANONYMOUS) {
+
+				List<String> listAtributes = serviceRepair.getAtributes(null);
+				content.append(getPage(listAtributes));
+				content.append(getPageList(listAtributes, listRepairs));
+
+			} else if (userType == Util.USER_LOGGED) {
+				List<String> listAtributes = serviceRepair
+						.getAtributes(new User());
+
+				content.append(getPage(listAtributes));
+				content.append(getPageList(listAtributes, listRepairs));
 			}
 
-			response.getWriter().write(content);
+			content.append("</body>");
+			content.append("</html>");
+
+			response.getWriter().write(content.toString());
+
 		} else {
 
 			final String[] services = serviceManager.getServices().split(";");
@@ -97,65 +114,72 @@ public class ServletServices extends HttpServlet {
 	}
 
 	private String getPageList(final List<String> atributeList,
-			final List<LightingRepeair> lightingRepeairList, final User user) {
+			final List<Repair> repeairList) {
 
 		final StringBuilder stringBuilder = new StringBuilder();
 
 		stringBuilder.append("<table>");
+		stringBuilder.append("<tr>");
 
-		if (user == null) {
-			stringBuilder.append("<tr>");
-
-			for (final String atribute : atributeList) {
-				stringBuilder.append("<th>" + atribute + "</th>");
-			}
-
-			stringBuilder.append("</tr>");
-			stringBuilder.append("<tr>");
-
-			for (final LightingRepeair lightingRepeair : lightingRepeairList) {
-				stringBuilder.append("<th>" + lightingRepeair.getDescription()
-						+ "</th>");
-				stringBuilder.append("<th>" + lightingRepeair.getOpeningDate()
-						+ "</th>");
-				stringBuilder
-						.append("<th> <a href=\"url\">Visualizar</a> </th>");
-				stringBuilder.append("<th>" + lightingRepeair.getLightingType()
-						+ "</th>");
-				stringBuilder.append("<th>"
-						+ lightingRepeair.getStatus().getName() + "</th>");
-			}
-
-			stringBuilder.append("</tr>");
-
-		} else {
-
-			stringBuilder.append("<tr>");
-
-			for (final String atribute : atributeList) {
-				stringBuilder.append("<th>" + atribute + "</th>");
-			}
-
-			stringBuilder.append("</tr>");
-			stringBuilder.append("<tr>");
-
-			for (final LightingRepeair lightingRepeair : lightingRepeairList) {
-				stringBuilder.append("<th>" + lightingRepeair.getDescription()
-						+ "</th>");
-				stringBuilder.append("<th>" + lightingRepeair.getOpeningDate()
-						+ "</th>");
-				stringBuilder
-						.append("<th> <a href=\"url\">Visualizar</a> </th>");
-				stringBuilder.append("<th>" + lightingRepeair.getLightingType()
-						+ "</th>");
-				stringBuilder.append("<th>"
-						+ lightingRepeair.getStatus().getName()
-						+ "<a href=\"url\">Alterar</a>" + "</th>");
-			}
-
-			stringBuilder.append("</tr>");
-
+		for (final String atribute : atributeList) {
+			stringBuilder.append("<th>" + atribute + "</th>");
 		}
+
+		stringBuilder.append("</tr>");
+		stringBuilder.append("<tr>");
+
+		for (final Repair repair : repeairList) {
+			
+			stringBuilder.append("<th>" + repair.getDescription() + "</th>");
+			stringBuilder.append("<th>" + repair.getOpeningDate() + "</th>");
+			
+			if (repair instanceof LightingRepeair) {
+				stringBuilder.append("<th>" + ((LightingRepeair) repair).getLightingType() + "</th>");
+			} else if (repair instanceof ArborizationRepair) {
+				stringBuilder.append("<th>" + ((ArborizationRepair) repair).getTreeType() + "</th>");
+			}
+			
+			stringBuilder.append("<th>" + repair.getStatus().getName() + "</th>");
+		}
+
+		stringBuilder.append("</tr>");
+
+		stringBuilder.append("</table>");
+
+		return stringBuilder.toString();
+	}
+
+	private String getPageUserList(final List<String> atributeList,
+			final List<Repair> repeairList) {
+
+		final StringBuilder stringBuilder = new StringBuilder();
+
+		stringBuilder.append("<table>");
+		stringBuilder.append("<tr>");
+
+		for (final String atribute : atributeList) {
+			stringBuilder.append("<th>" + atribute + "</th>");
+		}
+
+		stringBuilder.append("</tr>");
+		stringBuilder.append("<tr>");
+
+		for (final Repair repair : repeairList) {
+			
+			stringBuilder.append("<th>" + repair.getDescription() + "</th>");
+			stringBuilder.append("<th>" + repair.getOpeningDate() + "</th>");
+			stringBuilder.append("<th> <a href=\"#\">Visualizar</a> </th>");
+			
+			if (repair instanceof LightingRepeair) {
+				stringBuilder.append("<th>" + ((LightingRepeair) repair).getLightingType() + "</th>");
+			} else if (repair instanceof ArborizationRepair) {
+				stringBuilder.append("<th>" + ((ArborizationRepair) repair).getTreeType() + "</th>");
+			}
+			
+			stringBuilder.append("<th>" + repair.getStatus().getName() + "<a href=\"#\">Alterar</a>" + "</th>");
+		}
+
+		stringBuilder.append("</tr>");
 
 		stringBuilder.append("</table>");
 
