@@ -91,8 +91,23 @@ public class Repair {
 
 		return new ArrayList<String>() {
 			{
-				add("Description");
+				add("Descrição");
 			}
 		};
+	}
+
+	public static List<String> getAtributes(final User user) {
+		final List<String> atributesList = new ArrayList<>();
+
+		atributesList.add("Descrição");
+		atributesList.add("Data de Abertura");
+
+		if (user != null) {
+			atributesList.add("Localização");
+		}
+
+		atributesList.add("Status");
+
+		return atributesList;
 	}
 }
