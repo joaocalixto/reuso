@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.org.cesar.reuse.commons.model.ArborizationRepair;
+import br.org.cesar.reuse.commons.model.GeoMapData;
 import br.org.cesar.reuse.commons.model.LightingRepeair;
 import br.org.cesar.reuse.commons.model.Repair;
+import br.org.cesar.reuse.commons.model.StaticMapException;
 import br.org.cesar.reuse.commons.model.User;
 import br.org.cesar.reuse.commons.service.IRepair;
 import br.org.cesar.reuse.service.ServiceManager;
@@ -23,12 +25,13 @@ public class ServletServices extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	String value;
+	ServiceManager serviceManager;
 
 	@Override
 	protected void doGet(final HttpServletRequest request,
 			final HttpServletResponse response) throws ServletException,
 			IOException {
-		final ServiceManager serviceManager = Activator.getServiceManager();
+		serviceManager = Activator.getServiceManager();
 
 		value = request.getParameter(Util.PARAM_NAME);
 
@@ -180,7 +183,19 @@ public class ServletServices extends HttpServlet {
 				
 				stringBuilder.append("<th>" + repair.getDescription() + "</th>");
 				stringBuilder.append("<th>" + repair.getOpeningDate() + "</th>");
-				stringBuilder.append("<th> <a href=\"#\">Visualizar</a> </th>");
+				
+				
+				GeoMapData geoMapData = new GeoMapData(7, new Integer[] { 1, 2 }, false);
+				String url;
+				try {
+					url = serviceManager.getStaticMapURL(geoMapData);
+				} catch (StaticMapException e) {
+					url = "http://www.google.com.br";
+					e.printStackTrace();
+				}
+				
+				
+				stringBuilder.append("<th> <a href=\""+ url +"\">Visualizar</a> </th>");
 				
 				if (repair instanceof LightingRepeair) {
 					stringBuilder.append("<th>" + ((LightingRepeair) repair).getLightingType() + "</th>");

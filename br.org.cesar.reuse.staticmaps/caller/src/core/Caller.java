@@ -2,9 +2,9 @@ package core;
 
 import java.math.BigDecimal;
 
-import service.GeoMapData;
-import service.IStaticMap;
-import service.StaticMapException;
+import service.maps.IStaticMap;
+import br.org.cesar.reuse.commons.model.GeoMapData;
+import br.org.cesar.reuse.commons.model.StaticMapException;
 
 public class Caller {
 	/**
@@ -22,12 +22,8 @@ public class Caller {
 		center[1] = big2;
 		
 		Integer[] size = { 400, 400 };
-		GeoMapData geoMapData = new GeoMapData(center, 12, size, false);
-		try {
-			mapservice.getStaticMapURL(geoMapData);
-		} catch (StaticMapException e) {
-			e.printStackTrace();
-		}
+		GeoMapData geoMapData = new GeoMapData(12, size, false);
+		
 	}
 
 	public void setMap(IStaticMap maps) {

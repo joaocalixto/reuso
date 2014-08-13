@@ -4,5 +4,6 @@ Bundle-Name: GStaticMaps
 Bundle-SymbolicName: GStaticMaps
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Import-Package: service
+Import-Package: br.org.cesar.reuse.commons.model,
+ service.maps
 Service-Component: component.xml

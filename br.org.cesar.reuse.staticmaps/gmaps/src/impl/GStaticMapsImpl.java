@@ -2,9 +2,9 @@ package impl;
 
 import java.math.BigDecimal;
 
-import service.GeoMapData;
-import service.IStaticMap;
-import service.StaticMapException;
+import service.maps.IStaticMap;
+import br.org.cesar.reuse.commons.model.GeoMapData;
+import br.org.cesar.reuse.commons.model.StaticMapException;
 
 public class GStaticMapsImpl implements IStaticMap {
 

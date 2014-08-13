@@ -4,4 +4,6 @@ Bundle-Name: ServiceMaps
 Bundle-SymbolicName: ServiceMaps
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Export-Package: service
+Export-Package: service.maps
+Import-Package: br.org.cesar.reuse.commons.model,
+ br.org.cesar.reuse.commons.utility

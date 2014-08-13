@@ -3,7 +3,9 @@ package br.org.cesar.reuse.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.org.cesar.reuse.commons.model.GeoMapData;
 import br.org.cesar.reuse.commons.model.Repair;
+import br.org.cesar.reuse.commons.model.StaticMapException;
 import br.org.cesar.reuse.commons.model.User;
 import br.org.cesar.reuse.commons.service.IRepair;
 import br.org.cesar.reuse.commons.utility.Logger;
@@ -59,5 +61,9 @@ public class ServiceManager {
 	
 	public boolean login(User user){
 		return SecurityManager.getInstanceIAuthentication().login(user);
+	}
+	
+	public String getStaticMapURL(GeoMapData geoMapData) throws StaticMapException{
+		return MapsManager.getInstanceIStaticMap().getStaticMapURL(geoMapData);
 	}
 }
