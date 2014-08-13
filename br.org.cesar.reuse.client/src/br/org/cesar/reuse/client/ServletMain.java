@@ -50,6 +50,4 @@ public class ServletMain extends HttpServlet {
 		response.getWriter().write("</body></html>");
 
 	}
-	
-
 }
