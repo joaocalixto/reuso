@@ -34,10 +34,12 @@ public class ServletMain extends HttpServlet {
 				boolean authenticated = serviceManager.login(new User());
 				
 				if (authenticated){
+					SessionState.setTypeUserSession(request.getSession(),Util.USER_LOGGED);
 					response.sendRedirect(Util.PATH_SERVICES);
 				}
 
 			} else if (type == Util.USER_ANONYMOUS){
+				SessionState.setTypeUserSession(request.getSession(),Util.USER_ANONYMOUS);
 				response.sendRedirect(Util.PATH_SERVICES);
 			}
 		}

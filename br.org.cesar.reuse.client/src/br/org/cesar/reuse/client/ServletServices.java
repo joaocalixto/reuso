@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.org.cesar.reuse.commons.model.User;
 import br.org.cesar.reuse.commons.service.IRepair;
 import br.org.cesar.reuse.service.ServiceManager;
 
@@ -28,8 +29,16 @@ public class ServletServices extends HttpServlet {
 
 		if (value != null) {
 
+			int userType = SessionState.getTypeUserSession(request.getSession());
+			
 			final IRepair serviceRepair = serviceManager.getService(value);
-			final String content = getPage(serviceRepair.getAtributes());
+			
+			String content = "";
+			if (userType == Util.USER_ANONYMOUS)
+				content = getPage(serviceRepair.getAtributes(null));
+			else if (userType == Util.USER_LOGGED){
+				content = getPage(serviceRepair.getAtributes(new User()));
+			}
 
 			response.getWriter().write(content);
 		} else {
